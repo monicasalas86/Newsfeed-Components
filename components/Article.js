@@ -142,6 +142,7 @@ function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParag
   article.appendChild(button);
 
   // class names
+  article.className = 'article'
   articleDate.className = 'date';
   button.classList = 'expandButton';
 
@@ -154,8 +155,8 @@ function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParag
   button.textContent = '+';
 
   // button toggle
-  article.addEventListener('click', () => {
-    button.classList.toggle('article-open');
+  button.addEventListener('click', () => {
+    article.classList.toggle('article-open');
   })
 
   return article;
