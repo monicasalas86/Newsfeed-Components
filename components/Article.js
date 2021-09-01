@@ -86,6 +86,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Article',
+    date: 'September 1st, 2021',
+    firstParagraph: `Learning advanced JS `,
+
+    secondParagraph: `Created component `,
+
+    thirdParagraph: `added fancy things to the DOM`
   }
 ];
 
@@ -99,7 +108,9 @@ const data = [
     <p class="date">{date of the article}</p>
 
     {three separate paragraph elements}
-
+    <p></p>
+    <p></p>
+    <p></p>
     <span class="expandButton">+</span>
   </div>
 
@@ -114,3 +125,57 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+  // grabbing parent element
+  const articlesDiv = document.querySelector('.articles'); // div class='articles'
+
+// article maker 
+
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph }){
+
+  // create elements needed
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const button = document.createElement('span');
+
+  // structure elements together
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(button);
+
+  // class names
+  article.className = 'article'
+  articleDate.className = 'date';
+  button.classList = 'expandButton';
+
+  // adding text
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  p1.textContent = firstParagraph;
+  p2.textContent = secondParagraph;
+  p3.textContent = thirdParagraph;
+  button.textContent = '+';
+
+  // button toggle
+  button.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
+
+}
+
+const articleElements = data.map(articleElem => {
+  return articleMaker(articleElem);
+})
+
+articleElements.forEach(articleElement => {
+  articlesDiv.appendChild(articleElement);
+})
